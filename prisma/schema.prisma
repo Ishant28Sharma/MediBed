@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Ward {
+  id        String   @id @default(cuid())
+  name      String
+  floor     Int
+  totalBeds Int
+  beds      Bed[]
+}
+
+model Bed {
+  id          String         @id @default(cuid())
+  bedNumber   String
+  status      String         @default("available") // 'available', 'occupied', 'maintenance', 'emergency'
+  patientId   String?        @unique
+  patient     Patient?       @relation(fields: [patientId], references: [email])
+  wardId      String
+  ward        Ward           @relation(fields: [wardId], references: [id])
+  statusLogs  BedStatusLog[]
+  lastUpdated DateTime       @updatedAt
+}
+
+model Patient {
+  name         String
+  age          Int
+  gender       String
+  dob          String?
+  bloodType    String?
+  phone        String?
+  email        String            @id
+  address      String?
+  photoUrl     String?
+  room         String?
+  bedStatus    String?           @default("stable")
+  admittedAt   DateTime          @default(now())
+  dischargedAt DateTime?
+  bed          Bed?
+  documents    MedicalDocument[]
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+}
+
+model MedicalDocument {
+  id        String   @id @default(uuid())
+  title     String
+  type      String
+  date      String
+  size      String
+  url       String
+  patientId String
+  patient   Patient  @relation(fields: [patientId], references: [email])
+  createdAt DateTime @default(now())
+}
+
+model BedStatusLog {
+  id         String   @id @default(uuid())
+  bedId      String
+  bed        Bed      @relation(fields: [bedId], references: [id])
+  oldStatus  String
+  newStatus  String
+  changedAt  DateTime @default(now())
+}

@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #050505;
+  --surface: rgba(20, 20, 20, 0.6);
+  --surface-low: rgba(25, 25, 25, 0.5);
+  --surface-container: rgba(30, 30, 30, 0.4);
+  --surface-high: rgba(35, 35, 35, 0.3);
+  --surface-highest: rgba(40, 40, 40, 0.2);
+  
+  --primary: #a855f7;
+  --primary-dim: #c084fc;
+  --on-primary: #ffffff;
+  --secondary: #d946ef;
+  --tertiary: #2dd4bf;
+  --error: #ef4444;
+  --on-error: #ffffff;
+  
+  --on-surface: #ffffff;
+  --on-surface-variant: #a1a1aa;
+  --outline-variant: rgba(255, 255, 255, 0.1);
+}
+
+.dark {
+  --bg: #050505;
+  --surface: rgba(20, 20, 20, 0.6);
+  --surface-low: rgba(25, 25, 25, 0.5);
+  --surface-container: rgba(30, 30, 30, 0.4);
+  --surface-high: rgba(35, 35, 35, 0.3);
+  --surface-highest: rgba(40, 40, 40, 0.2);
+  
+  --primary: #a855f7;
+  --primary-dim: #c084fc;
+  --on-primary: #ffffff;
+  --secondary: #d946ef;
+  --tertiary: #2dd4bf;
+  --error: #ef4444;
+  --on-error: #ffffff;
+  
+  --on-surface: #ffffff;
+  --on-surface-variant: #a1a1aa;
+  --outline-variant: rgba(255, 255, 255, 0.1);
+}
+
+@layer base {
+  body {
+    @apply text-on-surface font-sans antialiased transition-colors duration-300;
+    background-color: var(--bg);
+    background-image: 
+      radial-gradient(circle at 15% 50%, rgba(168, 85, 247, 0.15), transparent 40%),
+      radial-gradient(circle at 85% 30%, rgba(45, 212, 191, 0.15), transparent 40%);
+    background-attachment: fixed;
+  }
+}
+
+@layer utilities {
+  .bg-surface,
+  .bg-surface-low,
+  .bg-surface-container,
+  .bg-surface-high,
+  .bg-surface-highest {
+    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.6) 100%) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border-color: var(--outline-variant) !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
+  }
+}
+
+.glass-panel {
+  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.8) 100%) !important;
+  backdrop-filter: blur(32px) !important;
+  -webkit-backdrop-filter: blur(32px) !important;
+  border: 1px solid var(--outline-variant) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4) !important;
+}
+
+.map-tiles-filtered {
+  filter: invert(90%) hue-rotate(180deg) contrast(85%) opacity(40%) grayscale(80%);
+}
+
+.custom-popup .leaflet-popup-content-wrapper {
+  background: rgba(20, 20, 20, 0.8) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4) !important;
+}
+
+.custom-popup .leaflet-popup-tip {
+  background: rgba(20, 20, 20, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.custom-popup .font-headline {
+  color: white !important;
+}
+
+.custom-popup .text-zinc-600 {
+  color: #a1a1aa !important;
+}
+
+.custom-hospital-marker {
+  background: transparent;
+  border: none;
+}
+
+.glow-primary {
+  box-shadow: 0 0 20px rgba(107, 33, 168, 0.15);
+}
+
+.dark .glow-primary {
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
+}
+
+.glow-line {
+  filter: drop-shadow(0 0 8px currentColor);
+}
